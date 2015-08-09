@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Relation;
 
 /**
  * Types of Products
@@ -24,7 +25,7 @@ class ProductTypes extends Model
     {
         $this->hasMany('id', 'Products', 'product_types_id', array(
         	'foreignKey' => array(
-        		'message' => 'Product Type cannot be deleted because it\'s used in Products'
+        		'action' => Relation::ACTION_CASCADE
         	)
         ));
     }

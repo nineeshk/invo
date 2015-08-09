@@ -5,6 +5,7 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Hidden;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Numericality;
+use Phalcon\Forms\Element\Select;
 use Phalcon\Validation\Validator\Between;
 
 class RobotsForm extends Form
@@ -69,6 +70,25 @@ class RobotsForm extends Form
                 'message' => 'Who is required'
             ))
         )); 
-        $this->add($who);                                                                                                 
+        $this->add($who);
+        
+    	$typeName = new Select("idx", 
+			RobotType::find(), 
+			array(
+				'using' => array(
+				'idx', 
+				'typeName'
+				),
+				"useEmpty" => true
+			)
+		);
+	$typeName->setLabel("Name Type");
+	$typeName->addValidators(array(
+		new Presenceof(array(
+			'message' => 'Option required'
+		))
+	));
+
+	$this->add($typeName);                
    }
 }

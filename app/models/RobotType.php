@@ -11,14 +11,14 @@ class RobotType extends Model
 	/**
 	 * @var string
 	 */
-	protected $typeName;
+#	protected $typeName;
 
 	/**
 	 * @var integer
 	 */
-	protected $robotTypeIdx;
+#	protected $idx;
 		
-	public function getTypeName()
+/*	public function getTypeName()
 	{
 		return $this->typeName;
 	}
@@ -28,20 +28,23 @@ class RobotType extends Model
 		$this->typeName = $typeName;	
 	}
 
-	public function getRobotTypeIdx()
+	public function getIdx()
 	{
-		return $this->robotTypeIdx;
+		return $this->idx;
 	}
 	
-	public function setRobotTypeIdx($robotTypeIdx)
+	public function setIdx($idx)
 	{
-		return $this->robotTypeIdx = $robotTypeIdx;
+		return $this->idx = $idx;
 	}
-	
+*/
+	public $idx;
+	public $typeName;
+		
 	public function columnMap()
 	{
 		return array(
-			'robot_type_idx' => 'robotTypeIdx',
+			'idx' => 'idx',
 			'name'		 => 'typeName'
 		);
 	}
@@ -52,6 +55,8 @@ class RobotType extends Model
 	public function initialize()
 	{
 		$this->setSource("robot_type");
-		$this->hasMany("robotTypeIdx", "robots", "robotTypeIdx");
+		$this->hasMany("idx", "robots", "robotTypeIdx", array('foreignKey' => array('action' => Relation::ACTION_CASCADE)));
+		
+		#$this->belongsTo("robotTypeIdx", "robots", "robotTypeIdx", array('foreignKey' => array('action' => Relation::ACTION_CASCADE)));
 	}
 }

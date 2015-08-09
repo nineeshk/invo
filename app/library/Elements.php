@@ -64,6 +64,11 @@ class Elements extends Component
             'action' => 'index',
             'any' => true
         ),
+        'Robottype' => array(
+            'controller' => 'robottype',
+            'action' => 'index',
+            'any' => true
+        ),
         'Your Profile' => array(
             'controller' => 'invoices',
             'action' => 'profile',

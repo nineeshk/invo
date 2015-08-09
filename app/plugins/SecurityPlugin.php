@@ -47,7 +47,8 @@ class SecurityPlugin extends Plugin
 				'products'     => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
 				'producttypes' => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
 				'invoices'     => array('index', 'profile'),
-				'robots'       => array('index', 'new', 'edit', 'save', 'create', 'delete')
+				'robots'       => array('index', 'new', 'edit', 'save', 'create', 'delete'),
+				'robottype'    => array('index', 'new', 'edit', 'save', 'create', 'delete')	
 			);
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);
