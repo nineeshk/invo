@@ -46,6 +46,7 @@ class SecurityPlugin extends Plugin
 				'companies'    => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
 				'products'     => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
 				'producttypes' => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
+				'productdescription' => array('index'),
 				'invoices'     => array('index', 'profile'),
 				'robots'       => array('index', 'new', 'edit', 'save', 'create', 'delete'),
 				'robottype'    => array('index', 'new', 'edit', 'save', 'create', 'delete')	

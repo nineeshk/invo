@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Relation;
 
 /**
  * Products
@@ -37,9 +38,10 @@ class Products extends Model
 	 */
 	public function initialize()
 	{
-		$this->belongsTo('product_types_id', 'ProductTypes', 'id', array(
-			'reusable' => true
-		));
+		$this->setSource("products");
+		$this->belongsTo('product_types_id', 'ProductTypes', 'id', array('reusable' => true, "foreignKey" => true));
+		$this->hasOne('id', 'ProductDescription', 'productid', array('foreignKey' => array('action' => Relation::CASCADE)));
+		
 	}
 
 	/**
@@ -50,9 +52,8 @@ class Products extends Model
 	public function getActiveDetail()
 	{
 		if ($this->active == 'Y') {
-			return 'Yes';
+#			return 'Yes';
 		}
-		return 'No';
+#		return 'No';
 	}
-
 }

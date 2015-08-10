@@ -72,7 +72,7 @@ class RobotsForm extends Form
         )); 
         $this->add($who);
         
-    	$typeName = new Select("idx", 
+    	$typeName = new Select("robotTypeIdx", 
 			RobotType::find(), 
 			array(
 				'using' => array(
@@ -88,7 +88,6 @@ class RobotsForm extends Form
 			'message' => 'Option required'
 		))
 	));
-
 	$this->add($typeName);                
    }
 }

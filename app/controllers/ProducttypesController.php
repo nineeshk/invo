@@ -161,6 +161,10 @@ class ProductTypesController extends ControllerBase
     public function deleteAction($id)
     {
         $productTypes = ProductTypes::findFirstById($id);
+        
+        #echo "<pre>";
+        #print_r($productTypes);exit;
+        
         if (!$productTypes) {
             $this->flash->error("Product types was not found");
             return $this->forward("producttypes/index");

@@ -59,6 +59,11 @@ class Elements extends Component
             'action' => 'index',
             'any' => true
         ),
+        'Product Description' => array(
+            'controller' => 'productdescription',
+            'action' => 'index',
+            'any' => true
+        ),
         'Robots' => array(
             'controller' => 'robots',
             'action' => 'index',

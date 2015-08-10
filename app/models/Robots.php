@@ -11,29 +11,29 @@ class Robots extends Model
 	/**
 	 * @var integer
 	 */
-#	protected $id;
+	protected $id;
 
 	/**
 	 * @var string
 	 */
-#	protected $name;
+	protected $name;
 
 	/**
 	 * @var string
 	 */
-#	protected $type;
+	protected $type;
 
 	/**
 	 * @var integer
 	 */
-#	protected $year;
+	protected $year;
 	
 	/**
 	 * @var integer
 	 */
-#	protected $robotTypeIdx;
+	protected $robotTypeIdx;
 		
-/*	public function getId()
+	public function getId()
 	{
 		return $this->id;
 	}
@@ -82,13 +82,7 @@ class Robots extends Model
 	{
 		return $this->robotTypeIdx = $robotTypeIdx;
 	}
-*/
-	public $id;
-	public $name;
-	public $type;
-	public $year;
-	public $robotTypeIdx;
-		
+			
 	public function columnMap()
 	{
 		return array(
@@ -105,12 +99,7 @@ class Robots extends Model
 	 */
 	public function initialize()
 	{
-		#$this->belongsTo('product_types_id', 'ProductTypes', 'id', array(
-		#	'reusable' => true
-		#));
-		
 		$this->hasOne("id", "Outo", "robotid", array('foreignKey' => array('action' => Relation::ACTION_CASCADE)));
-		$this->belongsTo("robotTypeIdx", "RobotType", "idx", array("reusable" => true));
-		#$this->hasOne("robotTypeIdx", "RobotType", "robotTypeIdx");
+		$this->belongsTo("robotTypeIdx", "RobotType", "idx", array("reusable" => true, "foreignKey" => true));
 	}
 }

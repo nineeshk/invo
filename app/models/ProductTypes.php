@@ -23,10 +23,7 @@ class ProductTypes extends Model
      */
     public function initialize()
     {
-        $this->hasMany('id', 'Products', 'product_types_id', array(
-        	'foreignKey' => array(
-        		'action' => Relation::ACTION_CASCADE
-        	)
-        ));
+#        $this->setSource("product_types");
+        $this->hasMany('id', 'Products', 'product_types_id', array('foreignKey' => array( 'action' => Relation::ACTION_CASCADE)));
     }
 }

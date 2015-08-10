@@ -58,10 +58,6 @@ class Outo extends Model
 	 */
 	public function initialize()
 	{
-		#$this->belongsTo('product_types_id', 'ProductTypes', 'id', array(
-		#	'reusable' => true
-		#));
 		$this->hasOne("robotid", "Robots", "id");
-		#$this->belongsTo("robotid", "Robots", "id");
 	}	
 }
