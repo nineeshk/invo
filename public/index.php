@@ -7,10 +7,10 @@ use Phalcon\Config\Adapter\Ini as ConfigIni;
 
 //$_GET['_url'] = '/contact/send';
 //$_SERVER['REQUEST_METHOD'] = 'POST';
-$debug = new \Phalcon\Debug();
-$debug->listen();
+#$debug = new \Phalcon\Debug();
+#$debug->listen();
 
-#try {
+try {
 
 	define('APP_PATH', realpath('..') . '/');
 
@@ -33,6 +33,6 @@ $debug->listen();
 
 	echo $application->handle()->getContent();
 
-#} catch (Exception $e){
-#	echo $e->getMessage();
-#}
+} catch (Exception $e){
+	echo $e->getMessage();
+}

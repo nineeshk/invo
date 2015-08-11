@@ -5,7 +5,7 @@ use Phalcon\Mvc\Model;
 /**
  * ProductDescription
  */
-class Productdescription extends Model
+class ProductDescription extends Model
 {
 	/**
 	 * @var integer
@@ -20,17 +20,11 @@ class Productdescription extends Model
 	public $description;
 
 	/**
-	 * Products initializer
+	 * ProductDescription initializer
 	 */
-	 
-	#public function getSource() 
-	#{
-	#	return 'ProductDescription';
-	#}
-	 
 	public function initialize()
 	{
 		$this->setSource("productDescription");
-		$this->hasOne('productid', 'Products', 'id', array('reusable' => true));
+		$this->hasOne('productid', 'Products', 'id');
 	}
 }

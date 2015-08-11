@@ -18,7 +18,7 @@ class ProductdescriptionController extends ControllerBase
     
     public function indexAction()
     {
-        $res = Productdescription::find();
+        $res = ProductDescription::find();
         print_r($res);
     }
 }

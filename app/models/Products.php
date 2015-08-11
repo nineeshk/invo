@@ -38,10 +38,9 @@ class Products extends Model
 	 */
 	public function initialize()
 	{
-		$this->setSource("products");
+		#$this->setSource("products");
+		$this->hasOne('id', 'ProductDescription', 'productid', array('foreignKey' => array('action' => Relation::ACTION_CASCADE)));
 		$this->belongsTo('product_types_id', 'ProductTypes', 'id', array('reusable' => true, "foreignKey" => true));
-		$this->hasOne('id', 'ProductDescription', 'productid', array('foreignKey' => array('action' => Relation::CASCADE)));
-		
 	}
 
 	/**
