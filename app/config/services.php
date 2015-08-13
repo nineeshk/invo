@@ -9,6 +9,8 @@ use Phalcon\Mvc\Model\Metadata\Memory as MetaData;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Events\Manager as EventsManager;
+use Phalcon\Cache\Frontend\Data as FrontendData;
+use Phalcon\Cache\Backend\Libmemcached as BackMemCached;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -123,4 +125,29 @@ $di->set('flash', function(){
  */
 $di->set('elements', function(){
 	return new Elements();
+});
+
+/**
+ * Sets the models cache service
+ */
+$di->set('modelsCache', function () {
+
+	// Cache data for one day by default
+	$frontCache = new FrontendData(
+		array(
+			"lifetime" => 86400
+		)
+	);
+	
+	// Memcached connection settings
+	$cache = new BackMemCached($frontCache, array(
+	"servers" => array(
+		array(		
+			"host" => "127.0.0.1",
+			"port" => "11211",
+			"weight" => "1"
+		)	
+	)
+	));				
+	return $cache;
 });
