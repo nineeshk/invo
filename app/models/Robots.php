@@ -1,12 +1,12 @@
 <?php
 
-use Phalcon\Mvc\Model;
+#use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Relation;
 
 /**
  * Robots
  */
-class Robots extends Model
+class Robots extends CacheableModel
 {
 	/**
 	 * @var integer

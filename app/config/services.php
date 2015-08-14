@@ -135,7 +135,8 @@ $di->set('modelsCache', function () {
 	// Cache data for one day by default
 	$frontCache = new FrontendData(
 		array(
-			"lifetime" => 86400
+			"lifetime" => 86400,
+			"reusable" => true
 		)
 	);
 	

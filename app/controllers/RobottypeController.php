@@ -10,7 +10,10 @@ class RobottypeController extends ControllerBase
 
     public function indexAction()
     {
-        $robottype = RobotType::find();
+        $cacheSeconds = 20;
+        $robottype = RobotType::findCached(array(
+            "key" => "RobotType.Cached"
+        ), $cacheSeconds);
         $this->view->robottype = $robottype;
     }
     

@@ -1,12 +1,10 @@
 <?php
-
-use Phalcon\Mvc\Model;
 use Phalcon\Mvc\Model\Relation;
 
 /**
  * RobotType
  */
-class RobotType extends Model
+class RobotType extends CacheableModel
 {
 	/**
 	 * @var string

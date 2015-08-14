@@ -1,6 +1,4 @@
 <?php
-#use Phalcon\Cache\Frontend\Data as FrontData;
-#use Phalcon\Cache\Backend\Libmemcached as BackMemCached;
 
 class RobotsController extends ControllerBase
 {
@@ -12,24 +10,18 @@ class RobotsController extends ControllerBase
 
     public function indexAction()
     {
-	#$this->modelsCache->delete("robots.cache");
-        $cacheKey = 'robots.cache';
-        $robots   = $this->modelsCache->get($cacheKey, 20);
-
-        if ($robots === null) {
-            echo "here";
-            $robots = Robots::find(
-                array(
-                    "conditions" => "type = ?1",
-                    "order" => "name ASC",
-                    "limit" => 100,
-                    "bind" => array(
-                        1 => "mechanical"
-                    )
-                )
-            );
-            $this->modelsCache->save($cacheKey, $robots, 20);
-        }
+        #calling a custom caching findmethod
+        $cacheSeconds = 60;
+        $robots = Robots::findCached(
+        array(
+            "conditions" => "type = ?1",
+            "order" => "name ASC",
+            "limit" => 100,
+            "bind" => array(
+                1 => "mechanical"
+            )
+            ), $cacheSeconds                    
+        );
         #$robots = Robots::find();
         $this->view->robots = $robots;
     }
