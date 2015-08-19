@@ -11,6 +11,8 @@ use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Cache\Frontend\Data as FrontendData;
 use Phalcon\Cache\Backend\Libmemcached as BackMemCached;
+use Phalcon\Logger\Adapter\File as FileLogger;
+use Phalcon\Cache\Backend\File as FileCache;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -83,7 +85,7 @@ $di->set('volt', function($view, $di) {
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
-$di->set('db', function() use ($config) {
+/*$di->set('db', function() use ($config) {
 	$dbclass = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
 	return new $dbclass(array(
 		"host"     => $config->database->host,
@@ -91,6 +93,42 @@ $di->set('db', function() use ($config) {
 		"password" => $config->database->password,
 		"dbname"   => $config->database->name
 	));
+});*/
+
+$di->set('db', function() use ($config) {
+        $dbclass = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
+        $connection = new $dbclass(array(
+                "host"     => $config->database->host,
+                "username" => $config->database->username,
+                "password" => $config->database->password,
+                "dbname"   => $config->database->name
+        ));
+        
+	$debug = $config->application->debug;
+        if ($debug) {
+            $eventsManager = new EventsManager();
+            $logger = new FileLogger(APP_PATH . $debug . "debug.log");
+            //Listen all the database events
+            $eventsManager->attach(
+                'db',
+                function ($event, $connection) use ($logger) {
+                    /** @var Phalcon\Events\Event $event */
+                    if ($event->getType() == 'beforeQuery') {
+                        /** @var DatabaseConnection $connection */
+                        $variables = $connection->getSQLVariables();
+                        if ($variables) {
+                            $logger->log($connection->getSQLStatement() . ' [' . join(',', $variables) . ']', \Phalcon\Logger::INFO);
+                        } else {
+                            $logger->log($connection->getSQLStatement(), \Phalcon\Logger::INFO);
+                        }
+                    }
+                }
+            );
+            //Assign the eventsManager to the db adapter instance
+            $connection->setEventsManager($eventsManager);
+        }
+
+	return $connection;
 });
 
 /**
@@ -144,7 +182,7 @@ $di->set('modelsCache', function () {
 	$cache = new BackMemCached($frontCache, array(
 	"servers" => array(
 		array(		
-			"host" => "127.0.0.1",
+			"host" => "192.168.167.35",
 			"port" => "11211",
 			"weight" => "1"
 		)	

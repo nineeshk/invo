@@ -1,4 +1,5 @@
 <?php
+use \DataTables\DataTable;
 
 class RobotsController extends ControllerBase
 {
@@ -22,6 +23,7 @@ class RobotsController extends ControllerBase
             )
             ), $cacheSeconds                    
         );
+        
         #$robots = Robots::find();
         $this->view->robots = $robots;
     }

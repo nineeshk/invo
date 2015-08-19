@@ -39,11 +39,10 @@ $("#a1").click(function(){
 
 </form>
 #}
-<h2>Table</h2>
-
+<h2>Robots</h2>
 {% for robot in robots %}
 	{% if loop.first %}
-		<table border="1" cellspacing="10">
+		<table id="example_basic" class="table table-striped">
 		<tr>
 			<th>#</th>
 			<th>Id</th>

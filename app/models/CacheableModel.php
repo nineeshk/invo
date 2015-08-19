@@ -23,7 +23,7 @@ class CacheableModel extends Model
 	        return preg_replace('/[\x00-\x1F\x80-\xFF\s]/', '', join(',', $uniqueKey));
 	}
 
-	protected  static function _getCache($key)
+	protected static function _getCache($key)
 	{
                 $modelsCache = \Phalcon\Di::getDefault()->getShared('modelsCache')->get($key);
                 return $modelsCache;  
@@ -45,7 +45,11 @@ class CacheableModel extends Model
 		$key = self::_createKey($parameters);
 		$result = self::_getCache($key);
 
+                echo "Test";		
+#		echo "Result:" . $result;
+
 		if ($result === null) {
+		echo "here";
 		        $result = parent::find($parameters);
 		        self::_setCache($key, $result, $cacheSeconds);
 		}

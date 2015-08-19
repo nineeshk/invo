@@ -14,6 +14,8 @@ try {
 
 	define('APP_PATH', realpath('..') . '/');
 
+	include __DIR__ . '../../vendor/autoload.php';
+
 	/**
 	 * Read the configuration
 	 */
